@@ -21,9 +21,7 @@ def get_ai_response(messages):
     if not api_key:
         return "I can’t find OPENAI_API_KEY. Add it to the .env file in the project root."
 
-    # -------------------------------
-    # Easter eggs & playful behavior
-    # -------------------------------
+    # Easters eggs section
     last_user_message = ""
     for m in reversed(messages):
         if m["role"] == "user":
@@ -52,7 +50,7 @@ def get_ai_response(messages):
             "Which past experience keeps resurfacing in your interviews?"
         )
 
-    # Random fun twist (1 in 6 responses)
+    # Random twist
     if random.randint(1, 6) == 3:
         messages.append({
             "role": "system",
@@ -62,9 +60,7 @@ def get_ai_response(messages):
             )
         })
 
-    # -------------------------------
-    # AI call with error handling
-    # -------------------------------
+    # AI call error-handling
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",

@@ -17,10 +17,17 @@ def main():
             save_memory(messages)  # save before exiting
             print("Saved in the timeline. Bye.")
             break
+        
+        if user_input.lower() == "/clear":
+            messages = []
+            save_memory(messages)
+            print("Memory cleared.")
+            continue
 
         if user_input.lower() == "/help":
-            print("Commands: /mode past | /mode present | /mode future | /quit")
+            print("Commands: /mode past | /mode present | /mode future | /clear | /quit")
             continue
+        
 
         if user_input.lower().startswith("/mode"):
             parts = user_input.split()
@@ -31,14 +38,16 @@ def main():
             print(f"Mode set to: {mode}")
             continue
 
-        # Add mode into the user's message so the AI follows it
-        messages.append({"role": "user", "content": f"[mode={mode}] {user_input}"})
+        # Adding the mode into the user's message so the AI follows it
+        messages.append({"role": "system", "content": f"Current mode: {mode}. Follow the mode rules."})
+        messages.append({"role": "user", "content": user_input})
+
         reply = get_ai_response(messages)
 
         print("\n" + reply + "\n")
 
         messages.append({"role": "assistant", "content": reply})
-        save_memory(messages)  # persist after each exchange
+        save_memory(messages)  
 
 if __name__ == "__main__":
     main()
