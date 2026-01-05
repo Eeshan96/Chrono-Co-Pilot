@@ -30,7 +30,7 @@ def get_ai_response(messages):
 
     if "banana" in last_user_message:
         return (
-            "Mode: present | Timeline: anomaly detected 🍌\n\n"
+            "Mode: present | Timeline: anomaly detected \n\n"
             "Banana accepted as a temporal access code.\n"
             "Mini-mission: explain your strongest interview story in exactly 3 sentences."
         )
